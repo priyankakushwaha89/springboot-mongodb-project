@@ -1,169 +1,119 @@
-Spring Boot MongoDB Project
+# SpringBoot-MongoDB-DockerCompose
+
+This Spring Boot project demonstrates how to integrate `MongoDB` with `Docker Compose` for managing a sportTeam entity. The project provides `CRUD operations` for managing sports teams and utilizes `Docker Compose` to run `MongoDB` and the `Spring Boot application` in `isolated containers`.
+
+## Features
+- `Spring Boot`: A framework to build stand-alone, production-grade Spring-based applications.
+- `Maven`: Dependency management and build automation.
+- `MongoDB`: NoSQL database for storing and managing sportTeam data.
+- `Containerization`: Docker Compose for deployment.
+
+## Technologies Used
+- Java
+- Spring Boot
+- Hibernate
+- Mongodb(can be replaced with any other database)
+
+## Getting Started
+
+### Prerequisites
+
+- Java 8 or higher
+- Maven 3.6 or higher
+
+### Installation
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/priyankakushwaha89/springboot-mongodb-project.git
+   cd springboot-mongodb-project
+
+2. Configure the database:
+
+    Update the src/main/resources/application.properties file with your database connection details:
+     ```sh
+    spring.data.mongodb.uri=mongodb://localhost:27017/Sportsname
+        #or
+    #spring.data.mongodb.port=27017
+    spring.data.mongodb.database=Sportsname
+   
+3. Build the project:
+   ```sh
+     mvn clean install
+4. Run the application:
+   ```sh
+     mvn spring-boot:run
+The application will start on http://localhost:8080.
+
+### Endpoints
+
+1. Test Endpoint
+- URL: `/test`
+- Method: GET
+- Description: Test the API to ensure it's running
+- Response: "This is Method Arguement Not Valid Exception Test"
+
+2. Save Data
+- URL: `/save`
+- Method: POST
+- Description: Add new user data.
+- Request Body: json in postman
+  
+  ```sh
+  {
+        "id": 1,
+        "tname": "black",
+        "tmember": 5,
+        "tscore": 20
+    }
+
+3. Get All Users Data
+- URL: `/all`
+- Method: GET
+- Description: Returns a list of all users data.
+  
+  ```sh
+  [
+    {
+        "id": 1,
+        "tname": "black",
+        "tmember": 5,
+        "tscore": 20
+    },
+    {
+        "id": 2,
+        "tname": "pink",
+        "tmember": 5,
+        "tscore": 19
+    },
+    {
+        "id": 3,
+        "tname": "red",
+        "tmember": 5,
+        "tscore": 18
+    }
+]
+  
+4. Retreving Data Using name and userId.
+- URL: `/{id}` 
+- Method: GET
+- Description: Returns user data of specific id.
+
+5. Updating Users data
+- URL: `/upd/{id}`
+- Method: PUT
+- Description: Updates all fields of data.
 
-Overview
+6. Deletion of User data
+- URL: `/del/{id}`
+- Method: DELETE
+- Description: Delete user data of provided id.
 
-This is a CRUD application built using Spring Boot and MongoDB. The application manages SportTeam entities and demonstrates basic CRUD operations. It also leverages Docker Compose for containerized deployment.
 
-Features
+## Project Structure
 
-Entity: SportTeam with CRUD operations.
+- SportTeam: Entity class representing a sports Team profile.
+- TeamRepository: Repository interface for CRUD operations on Sports Team profiles.
+- MyController: REST controller for handling user-related requests.
 
-Database: MongoDB for data storage.
-
-Containerization: Docker Compose for deployment.
-
-Technologies Used
-
-Spring Boot: Framework for application development.
-
-MongoDB: NoSQL database for data persistence.
-
-Docker Compose: For container orchestration.
-
-Spring Data MongoDB: For database interaction.
-
-Project Structure
-
-src/
-├── main/
-│   ├── java/
-│   │   └── com.example.sportsteam/
-│   │       ├── controller/
-│   │       │   └── TeamController.java
-│   │       ├── entity/
-│   │       │   └── SportTeam.java
-│   │       ├── repository/
-│   │       │   └── TeamRepository.java
-│   │       └── SportTeamApplication.java
-│   └── resources/
-│       ├── application.properties
-│       ├── data/
-│       │   └── import.json (optional: sample data)
-│       └── static/
-└── test/
-
-Getting Started
-
-Prerequisites
-
-Java 17 or later
-
-Maven
-
-Docker and Docker Compose
-
-Clone the Repository
-
-git clone https://github.com/your-username/springboot-mongodb-project.git
-cd springboot-mongodb-project
-
-Build the Application
-
-mvn clean install
-
-Run with Docker Compose
-
-Make sure docker-compose.yml is in the root directory.
-
-Start the services:
-
-docker-compose up
-
-Access the application at:
-
-http://localhost:8080
-
-Endpoints
-
-Base URL
-
-http://localhost:8080/api/v1/teams
-
-Endpoints
-
-Method
-
-Endpoint
-
-Description
-
-GET
-
-/
-
-Get all teams
-
-GET
-
-/{id}
-
-Get team by ID
-
-POST
-
-/
-
-Create a new team
-
-PUT
-
-/{id}
-
-Update team by ID
-
-DELETE
-
-/{id}
-
-Delete team by ID
-
-Example SportTeam Entity
-
-{
-  "id": "team123",
-  "name": "Golden Eagles",
-  "city": "New York",
-  "players": ["John Doe", "Jane Smith"]
-}
-
-Docker Compose Configuration
-
-docker-compose.yml
-
-version: '3.8'
-services:
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
-
-  springboot-app:
-    build: .
-    container_name: springboot-mongodb-app
-    ports:
-      - "8080:8080"
-    depends_on:
-      - mongodb
-
-volumes:
-  mongo-data:
-
-How to Contribute
-
-Fork the repository.
-
-Create a feature branch.
-
-Commit your changes.
-
-Push to the branch.
-
-Open a Pull Request.
-
-License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
 
